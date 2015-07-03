@@ -19,7 +19,7 @@ class Sheet(object):
 
         self.row_map = RowMap()
 
-    def _get_data(self, row_num, col_num):
+    def _get(self, row_num, col_num):
         data = self.sheet.row(row_num)[col_num]
 
         if data.ctype == xlrd.XL_CELL_NUMBER:
@@ -42,27 +42,24 @@ class CreatureSheet(Sheet):
                 )
 
     def get_id(self, row_num):
-        return self._get_data(row_num, 0)
+        return self._get(row_num, 0)
 
     def get_name(self, row_num):
-        return self._get_data(row_num, 1)
+        return self._get(row_num, 1)
 
     def get_rarity(self, row_num):
-        return self._get_data(row_num, 2)
+        return self._get(row_num, 2)
 
     def get_st(self, row_num):
-        return self._get_data(row_num, 3)
+        return self._get(row_num, 3)
 
     #skip hp
 
     def get_mhp(self, row_num):
-        return self._get_data(row_num, 5)
+        return self._get(row_num, 5)
 
     def get_cost(self, row_num):
-        try:
-            return self._get_data(row_num, 6)
-        except ValueError:
-            return self._get_data(row_num, 6)
+        return self._get(row_num, 6)
 
 def get_card_list():
     card_list = []
