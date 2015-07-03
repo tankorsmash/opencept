@@ -20,7 +20,15 @@ class Sheet(object):
         self.row_map = RowMap()
 
     def _get_data(self, row_num, col_num):
-        return self.sheet.row(row_num)[col_num].value
+        data = self.sheet.row(row_num)[col_num]
+
+        if data.ctype == xlrd.XL_CELL_NUMBER:
+            try:
+                return int(data.value)
+            except ValueError:
+                pass
+
+        return data.value
 
 class CreatureSheet(Sheet):
 
@@ -34,7 +42,7 @@ class CreatureSheet(Sheet):
                 )
 
     def get_id(self, row_num):
-        return int(self._get_data(row_num, 0))
+        return self._get_data(row_num, 0)
 
     def get_name(self, row_num):
         return self._get_data(row_num, 1)
@@ -43,16 +51,16 @@ class CreatureSheet(Sheet):
         return self._get_data(row_num, 2)
 
     def get_st(self, row_num):
-        return int(self._get_data(row_num, 3))
+        return self._get_data(row_num, 3)
 
     #skip hp
 
     def get_mhp(self, row_num):
-        return int(self._get_data(row_num, 5))
+        return self._get_data(row_num, 5)
 
     def get_cost(self, row_num):
         try:
-            return int(self._get_data(row_num, 6))
+            return self._get_data(row_num, 6)
         except ValueError:
             return self._get_data(row_num, 6)
 
