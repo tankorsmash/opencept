@@ -17,7 +17,7 @@ class Sheet(object):
     def __init__(self, sheet):
         self.sheet = sheet
 
-        self.row_map = RowMap()
+        self.row_map = RowMap() #unused
 
     def _get(self, row_num, col_num):
         data = self.sheet.row(row_num)[col_num]
@@ -31,7 +31,6 @@ class Sheet(object):
         return data.value
 
 class CreatureSheet(Sheet):
-
     def get_creature(self, row_num):
         return CreatureCard(
                 self.get_id(row_num),
@@ -63,10 +62,6 @@ class CreatureSheet(Sheet):
 
 def get_card_list():
     card_list = []
-
-    # dragon = Card("Dragon", 40, 40, 40)
-    # rat = Card("Giant Rat", 0, 40, 40)
-    # fighter = Card("Fighter", 20, 30, 40)
 
     all_data = xlrd.open_workbook("data/culdcept_saga_card_spreadsheet.xls")
     creature_sheet = CreatureSheet(all_data.sheet_by_name("Creatures"))
