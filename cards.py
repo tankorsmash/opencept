@@ -1,6 +1,7 @@
 
 class Card(object):
-    def __init__(self, name, cost, st, hp):
+    def __init__(self, _id, name, cost, st, hp):
+        self.id = _id
         self.name = name
         self.cost = cost
         self.st = st
@@ -8,7 +9,8 @@ class Card(object):
         self.max_hp = hp
 
     def __repr__(self):
-        return "{name} ${c} {st} {h}/{mh}".format(
+        return "#{_id} {name} ${c} {st} {h}/{mh}".format(
+            _id = self.id,
             name = self.name,
             c = self.cost,
             st = self.st,
