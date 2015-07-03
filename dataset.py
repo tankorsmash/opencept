@@ -2,7 +2,7 @@ import xlrd
 
 from collections import OrderedDict
 
-from cards import Card
+from cards import CreatureCard
 
 
 class RowMap(object):
@@ -33,7 +33,7 @@ class Sheet(object):
 class CreatureSheet(Sheet):
 
     def get_creature(self, row_num):
-        return Card(
+        return CreatureCard(
                 self.get_id(row_num),
                 self.get_name(row_num),
                 self.get_cost(row_num),
