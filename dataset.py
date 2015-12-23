@@ -2,7 +2,7 @@ import xlrd
 
 from collections import OrderedDict
 
-from cards import CreatureCard
+from cards import CreatureCard, EmptyCardRow
 
 
 class RowMap(object):
@@ -32,13 +32,19 @@ class Sheet(object):
 
 class CreatureSheet(Sheet):
     def get_creature(self, row_num):
-        return CreatureCard(
-                self.get_id(row_num),
-                self.get_name(row_num),
-                self.get_cost(row_num),
-                self.get_st(row_num),
-                self.get_mhp(row_num),
-                )
+        try:
+            creature = CreatureCard(
+                    self.get_id(row_num),
+                    self.get_name(row_num),
+                    self.get_cost(row_num),
+                    self.get_st(row_num),
+                    self.get_mhp(row_num),
+                    )
+        except EmptyCardRow as e:
+            creature = None
+
+
+        return creature
 
     def get_id(self, row_num):
         return self._get(row_num, 0)
@@ -66,12 +72,22 @@ def get_card_list():
     all_data = xlrd.open_workbook("data/culdcept_saga_card_spreadsheet.xls")
     creature_sheet = CreatureSheet(all_data.sheet_by_name("Creatures"))
 
+    try:
+        for row_num in xrange(500):
+            creature = creature_sheet.get_creature(row_num)
+            if creature:
+                card_list.append(creature)
 
-    card_list += [
-        creature_sheet.get_creature(1),
-        creature_sheet.get_creature(2),
-        creature_sheet.get_creature(3)
-    ]
+    except IndexError: #done monsters
+        print "found", row_num
+
+
+
+    # card_list += [
+    #         creature_sheet.get_creature(1),
+    #         creature_sheet.get_creature(2),
+    #         creature_sheet.get_creature(3)
+    #         ]
 
 
 

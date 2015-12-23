@@ -13,7 +13,8 @@ def main():
 
     p1 = Player("Player 1", p1_hand)
 
-    for card in p1.hand.cards:
+    for card in card_list:
+        # for card in p1.hand.cards:
         print card
 
 if __name__ == "__main__":

@@ -1,9 +1,14 @@
+class EmptyCardRow(Exception):
+    pass
 
 class Card(object):
     def __init__(self, _id, name, cost):
         self.id = _id
         self.name = name
         self.cost = cost
+
+        if not cost and not name and not _id:
+            raise EmptyCardRow
 
     def __repr__(self):
         return "Card - #{_id} {name} ${c}".format(
