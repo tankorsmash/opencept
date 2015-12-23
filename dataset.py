@@ -24,7 +24,11 @@ class Sheet(object):
 
         if data.ctype == xlrd.XL_CELL_NUMBER:
             try:
-                return int(data.value)
+                raw_val = float(data.value)
+                if raw_val.is_integer():
+                    return int(raw_val)
+                else:
+                    return raw_val
             except ValueError:
                 pass
 
