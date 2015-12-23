@@ -43,6 +43,7 @@ class CreatureSheet(Sheet):
                     self.get_cost(row_num),
                     self.get_st(row_num),
                     self.get_mhp(row_num),
+                    self.get_description(row_num),
                     )
         except EmptyCardRow as e:
             creature = None
@@ -70,6 +71,9 @@ class CreatureSheet(Sheet):
     def get_cost(self, row_num):
         return self._get(row_num, 6)
 
+    def get_description(self, row_num):
+        return self._get(row_num, 11)
+
 def get_card_list():
     card_list = []
 
@@ -84,15 +88,6 @@ def get_card_list():
 
     except IndexError: #done monsters
         print "found", row_num
-
-
-
-    # card_list += [
-    #         creature_sheet.get_creature(1),
-    #         creature_sheet.get_creature(2),
-    #         creature_sheet.get_creature(3)
-    #         ]
-
 
 
     spell_sheet = all_data.sheet_by_name("Spells")
