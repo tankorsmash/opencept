@@ -20,6 +20,5 @@ def main():
     card = card_list[-2]
     print card.description
 
-
 if __name__ == "__main__":
     main()

@@ -48,7 +48,6 @@ class CreatureSheet(Sheet):
         except EmptyCardRow as e:
             creature = None
 
-
         return creature
 
     def get_id(self, row_num):
